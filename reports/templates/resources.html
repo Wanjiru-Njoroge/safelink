@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Resources</title>
+</head>
+<body>
+    <div class="con-resources">
+        <header class="page-header">
+            <h1>Available Resources</h1>
+        </header>
+
+        <div class="resources-grid">
+            {% for resource in resources %}
+            <div class="resource-card {% if resource.category %}category-{{ resource.category|slugify }}{% endif %}">
+                <div class="resource-content">
+                    <div class="resource-header">
+                        <h2 class="resource-title">{{ resource.title }}</h2>
+                        {% if resource.date_added %}
+                        <span class="resource-date">{{ resource.date_added|date:"F j, Y" }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="resource-body">
+                        {% if resource.thumbnail %}
+                        <div class="resource-thumbnail">
+                            <img src="{{ resource.thumbnail.url }}" alt="{{ resource.title }}">
+                        </div>
+                        {% endif %}
+                        
+                        <div class="resource-description">
+                            <p>{{ resource.description }}</p>
+                        </div>
+                        <button class="read-more-btn" onclick="toggleContent(this)">Read More</button>
+
+                        {% if resource.tags.all %}
+                        <div class="resource-tags">
+                            {% for tag in resource.tags.all %}
+                            <span class="tag">{{ tag.name }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="resource-footer">
+                        {% if resource.file_url %}
+                        <a href="{{ resource.file_url }}" class="resource-link" target="_blank">
+                            <span class="link-text">Access Resource</span>
+                            <span class="link-icon">→</span>
+                        </a>
+                        {% endif %}
+                        
+                        {% if resource.file_size %}
+                        <span class="file-info">{{ resource.file_size }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function toggleContent(button) {
+            const description = button.previousElementSibling;
+            if (description.classList.contains('expanded')) {
+                description.classList.remove('expanded');
+                button.textContent = "Read More";
+            } else {
+                description.classList.add('expanded');
+                button.textContent = "Read Less";
+            }
+        }
+    </script>
+    
+</body>
+</html>

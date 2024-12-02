@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender Based Reporting site</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'index' %}" class="logo">SafeLink</a>
+            <ul class="nav-links">
+              
+                <li><a href="{% url 'resources' %}">Resources</a></li>
+                <li><a href="{% url 'report_create' %}">Report</a></li>
+                <a href="https://google.com" class="quick-exit" title="Quick Exit (Press Escape)">Quick Exit</a>
+            </ul>
+            
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="landing-header">
+        <div class="container">
+            <h1>Empowering Communities, Ending Violence</h1>
+            <p>Your trusted resource for support and information on addressing gender-based violence and femicide in Kenya.</p>
+            <a href="{% url 'resources' %}" class="cta-btn">Explore Resources</a>
+          
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We are dedicated to providing access to critical information and resources to help victims and communities combat gender-based violence and promote justice. Together, we strive to create a safer future.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Legal Aid</h3>
+                    <p>Access legal assistance and support to navigate justice systems effectively.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Counseling</h3>
+                    <p>Confidential counseling services to provide emotional and psychological support.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Community Support</h3>
+                    <p>Join a network of individuals and organizations working for a safer society.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p>If you or someone you know needs support, please don't hesitate to contact us.</p>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="emergency-contacts">
+                    <h3>24/7 Emergency Contacts</h3>
+                    <p>National GBV Hotline: 1195</p>
+                    <p>Police Emergency: 999</p>
+                </div>
+                <p>&copy; 2024 SafeLink. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>

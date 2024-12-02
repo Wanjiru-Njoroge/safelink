@@ -1,0 +1,323 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #7cb17c;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;  /* Reduced from 2rem */
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;  /* Reduced from 1.5rem */
+}
+
+form p {
+    margin-bottom: 0.5rem;  /* Reduced from 1rem */
+}
+
+/* Label styles */
+label {
+    display: block;
+    margin-bottom: 0.3rem;  /* Reduced from 0.5rem */
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Input styles */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.6rem;  /* Reduced from 0.8rem */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    margin-bottom: 0.5rem;  /* Added to create consistent spacing */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Submit button styles */
+button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 0.8rem 2rem;  /* Reduced from 1rem */
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 0.8rem;  /* Reduced from 1rem */
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Back link styles */
+.back-link {
+    display: inline-block;
+    margin-top: 1.5rem;  /* Reduced from 2rem */
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    button[type="submit"] {
+        padding: 0.8rem 1.5rem;
+    }
+}
+.success-container {
+    text-align: center;
+    padding: 50px;
+    background-color: #e0ffe0;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.success-container h1 {
+    color: #4CAF50;
+}
+
+.success-container p {
+    font-size: 18px;
+    color: #333;
+}
+/* General container styles */
+
+.con-resources {
+    background-color: #f5f7fa;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* Header styles */
+.page-header {
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    color: #2d3748;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+/* Grid layout */
+.resources-grid {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Card styles */
+.resource-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.resource-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Content layout */
+.resource-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header section */
+.resource-header {
+    margin-bottom: 1rem;
+}
+
+.resource-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.resource-date {
+    font-size: 0.875rem;
+    color: #718096;
+}
+
+/* Thumbnail styles */
+.resource-thumbnail {
+    margin: -1.5rem -1.5rem 1rem;
+}
+
+.resource-thumbnail img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Description styles */
+.resource-description {
+    color: #4a5568;
+    line-height: 1.625;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.resource-description:not(.expanded) {
+    max-height: 4.875rem; /* 3 lines */
+    
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+/* Tags styling */
+.resource-tags {
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background-color: #edf2f7;
+    color: #4a5568;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    background-color: #e2e8f0;
+}
+
+/* Footer section */
+.resource-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Button styles */
+.read-more-btn {
+    background-color: #4299e1;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.read-more-btn:hover {
+    background-color: #3182ce;
+}
+
+/* Link styles */
+.resource-link {
+    color: #4299e1;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.resource-link:hover {
+    color: #3182ce;
+}
+
+.link-icon {
+    transition: transform 0.2s ease;
+}
+
+.resource-link:hover .link-icon {
+    transform: translateX(4px);
+}
+
+.file-info {
+    font-size: 0.875rem;
+    color: #718096;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .con-resources {
+        padding: 1rem;
+    }
+    
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+}
