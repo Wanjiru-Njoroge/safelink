@@ -29,4 +29,6 @@ urlpatterns = [
     path('success/', views.report_success_view, name='report_success'),
     path('resources/', views.resources, name='resources'),
     path('add/', views.add_resource, name='add_resource'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
