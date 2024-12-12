@@ -100,8 +100,7 @@ Open a pull request for review.
 **Automated resource matching based on report details.**
 **Multilingual support to reach a broader audience.**
 
-License
-Safelink is open-source software licensed under the MIT License.
+
 
    
 
