@@ -29,6 +29,8 @@ urlpatterns = [
     path('success/', views.report_success_view, name='report_success'),
     path('resources/', views.resources, name='resources'),
     path('add/', views.add_resource, name='add_resource'),
+    path('save_location/', views.save_location, name='save_location'),
+    path('get_nearest_location/', views.get_nearest_location, name='get_nearest_location'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

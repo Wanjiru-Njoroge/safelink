@@ -6,6 +6,8 @@
     <title>Gender Based Reporting site</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
   
 
 </head>
@@ -36,7 +38,13 @@
                 <p>We are dedicated to providing access to critical information and resources to help victims and communities combat gender-based violence and promote justice. Together, we strive to create a safer future.</p>
             </div>
             <img src="/media/woman1-removebg-preview.png" alt="Image description">
-
+            <h2>Find Nearby Support Services</h2>
+            <button onclick="getLocation()">Get My Location</button>
+            <p id="location-status"></p>
+            <div id="location-container">
+                <button onclick="getNearestLocation()">Find Nearest Location</button>
+                <p id="location-status"></p>
+            </div>
         </div>
     </section>
 
@@ -79,5 +87,112 @@
             </div>
         </div>
     </footer>
+<script>
+    const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    function getLocation() {
+    const locationStatus = document.getElementById("location-status");
+    if (navigator.geolocation) {
+        locationStatus.innerText = "Fetching your location...";
+        navigator.geolocation.getCurrentPosition(showPosition, showError, { timeout: 10000 });
+    } else {
+        locationStatus.innerText = "Geolocation is not supported by your browser.";
+    }
+}
+
+function getLocation() {
+    const locationStatus = document.getElementById("location-status");
+    if (navigator.geolocation) {
+        locationStatus.innerText = "Fetching your location...";
+        navigator.geolocation.getCurrentPosition(showPosition, showError, { timeout: 10000 });
+    } else {
+        locationStatus.innerText = "Geolocation is not supported by your browser.";
+    }
+}
+
+function showPosition(position) {
+    const { latitude, longitude } = position.coords;
+    document.getElementById("location-status").innerHTML =
+        `Latitude: ${latitude.toFixed(6)}, Longitude: ${longitude.toFixed(6)}`;
+    
+    // Send location to backend
+    fetch('/save_location/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json',
+             'X-CSRFToken': csrftoken,
+         },
+        body: JSON.stringify({ latitude, longitude }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Location saved:', data);
+        alert('Your location has been saved successfully.');
+    })
+    .catch(error => {
+        console.error('Error saving location:', error);
+        alert('Failed to save your location.');
+    });
+}
+
+function showError(error) {
+    const errors = {
+        1: "Permission denied. Please allow location access.",
+        2: "Position unavailable. Try again later.",
+        3: "Request timed out. Please try again.",
+        0: "An unknown error occurred.",
+    };
+    document.getElementById("location-status").innerText = 
+        errors[error.code] || "An unexpected error occurred. Please try again.";
+}
+function getNearestLocation() {
+    const locationStatus = document.getElementById("location-status");
+
+    if (navigator.geolocation) {
+        locationStatus.innerText = "Fetching location...";
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const { latitude, longitude } = position.coords;
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+
+            try {
+                const response = await fetch('/get_nearest_location/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: JSON.stringify({ latitude, longitude }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    locationStatus.innerHTML = `
+                        Nearest Location: ${data.name}<br>
+                        Latitude: ${data.latitude}<br>
+                        Longitude: ${data.longitude}<br>
+                        Distance: ${data.distance.toFixed(2)} km
+                    `;
+                } else {
+                    const errorData = await response.json();
+                    locationStatus.innerText = `Error: ${errorData.error}`;
+                }
+            } catch (error) {
+                locationStatus.innerText = `Error: Unable to connect to the server.`;
+            }
+        }, (error) => {
+            const errors = {
+                1: "Permission denied. Please allow location access.",
+                2: "Position unavailable.",
+                3: "Request timeout.",
+                0: "Unknown error occurred.",
+            };
+            locationStatus.innerText = errors[error.code] || "An unknown error occurred.";
+        });
+    } else {
+        locationStatus.innerText = "Geolocation is not supported by this browser.";
+    }
+}
+
+</script>
+
 </body>
 </html>
